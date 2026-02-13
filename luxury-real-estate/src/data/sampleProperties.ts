@@ -4,9 +4,9 @@ export const sampleProperties: Property[] = [
   {
     id: '1',
     title: 'Magnificent Oceanfront Estate',
-    description: 'Discover this extraordinary oceanfront estate offering unparalleled luxury and breathtaking panoramic views. This architectural masterpiece spans over 8,500 square feet and features the finest finishes and amenities.',
-    price: 12500000,
-    currency: 'USD',
+    description: 'Discover this extraordinary oceanfront estate offering unparalleled luxury and breathtaking panoramic views. This architectural masterpiece spans over 790 square meters and features the finest finishes and amenities.',
+    price: 11500000,
+    currency: 'EUR',
     location: {
       address: '1255 Ocean Drive',
       city: 'Malibu',
@@ -18,8 +18,8 @@ export const sampleProperties: Property[] = [
     details: {
       bedrooms: 6,
       bathrooms: 8,
-      area: 8500,
-      areaUnit: 'sqft',
+      area: 790,
+      areaUnit: 'sqm',
       lotSize: 2.5,
       yearBuilt: 2019,
       propertyType: 'estate'
@@ -65,8 +65,8 @@ export const sampleProperties: Property[] = [
     id: '2',
     title: 'Penthouse with City Skyline Views',
     description: 'Luxurious penthouse apartment in the heart of Manhattan featuring floor-to-ceiling windows, premium finishes, and stunning city skyline views. This residence epitomizes urban sophistication.',
-    price: 8750000,
-    currency: 'USD',
+    price: 8050000,
+    currency: 'EUR',
     location: {
       address: '432 Park Avenue, Unit PH',
       city: 'New York',
@@ -78,8 +78,8 @@ export const sampleProperties: Property[] = [
     details: {
       bedrooms: 4,
       bathrooms: 5,
-      area: 4200,
-      areaUnit: 'sqft',
+      area: 390,
+      areaUnit: 'sqm',
       yearBuilt: 2015,
       propertyType: 'penthouse'
     },

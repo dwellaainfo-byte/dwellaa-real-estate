@@ -30,23 +30,23 @@ export default function PropertyCard({ property, featured = false }: PropertyCar
     <Card 
       padding="none" 
       hover 
-      className={`property-card ${featured ? 'lg:col-span-2 lg:row-span-2' : ''}`}
+      className="property-card"
     >
       <Link href={propertyUrl} className="block">
         {/* Image Container */}
-        <div className="relative overflow-hidden">
+        <div className="relative overflow-hidden aspect-[4/3]">
           {mainImage && !imageError ? (
             <Image
               src={mainImage.url}
               alt={mainImage.alt}
-              width={featured ? 800 : 600}
-              height={featured ? 600 : 400}
-              className={`property-image ${featured ? 'h-80 sm:h-96' : 'h-64 sm:h-72'}`}
+              fill
+              className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
               onError={() => setImageError(true)}
               priority={featured}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           ) : (
-            <div className={`property-image bg-gray-200 flex items-center justify-center ${featured ? 'h-80 sm:h-96' : 'h-64 sm:h-72'}`}>
+            <div className="w-full h-full bg-gray-200 flex items-center justify-center">
               <span className="text-gray-400">No image available</span>
             </div>
           )}

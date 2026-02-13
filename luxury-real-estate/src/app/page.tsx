@@ -151,14 +151,14 @@ export default function HomePage() {
             </div>
           ) : (
             <>
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
                 {featuredProperties.map((property, index) => (
                   <div
                     key={property.id}
-                    className={`animate-slide-up ${index === 0 ? 'lg:col-span-2 lg:row-span-1' : ''}`}
+                    className="animate-slide-up"
                     style={{ animationDelay: `${index * 200}ms` }}
                   >
-                    <PropertyCard property={property} featured={index === 0} />
+                    <PropertyCard property={property} featured={false} />
                   </div>
                 ))}
               </div>
