@@ -48,7 +48,7 @@ export default function Header() {
           : 'bg-white/95 backdrop-blur-sm'
       }`}
     >
-      {/* Top Bar */}
+      {/* Top Bar with Language Selector */}
       <div className="border-b border-gray-100">
         <div className="container-luxury">
           <div className="flex items-center justify-between h-12">
@@ -61,6 +61,7 @@ export default function Header() {
                 dwellaainfo@gmail.com
               </Link>
             </div>
+            <LanguageSelector />
           </div>
         </div>
       </div>
@@ -108,7 +109,7 @@ export default function Header() {
                   className="flex items-center space-x-2"
                 >
                   <LogIn size={16} />
-                  <span>Sign In</span>
+                  <span>{t('nav.signIn')}</span>
                 </Button>
                 <Button 
                   variant="primary" 
@@ -120,16 +121,16 @@ export default function Header() {
                   className="flex items-center space-x-2"
                 >
                   <UserPlus size={16} />
-                  <span>Join</span>
+                  <span>{t('nav.join')}</span>
                 </Button>
               </>
             ) : (
               <>
                 <Button variant="outline" size="sm">
-                  List Your Property
+                  {t('nav.listProperty')}
                 </Button>
                 <Button variant="primary" size="sm">
-                  Schedule Viewing
+                  {t('nav.scheduleViewing')}
                 </Button>
                 <UserMenu />
               </>
@@ -219,7 +220,7 @@ export default function Header() {
                       }}
                     >
                       <LogIn size={16} />
-                      <span>Sign In</span>
+                      <span>{t('nav.signIn')}</span>
                     </Button>
                     <Button 
                       variant="primary" 
@@ -231,16 +232,16 @@ export default function Header() {
                       }}
                     >
                       <UserPlus size={16} />
-                      <span>Join</span>
+                      <span>{t('nav.join')}</span>
                     </Button>
                   </>
                 ) : (
                   <>
                     <Button variant="outline" className="w-full">
-                      List Your Property
+                      {t('nav.listProperty')}
                     </Button>
                     <Button variant="primary" className="w-full">
-                      Schedule Viewing
+                      {t('nav.scheduleViewing')}
                     </Button>
                   </>
                 )}
