@@ -63,7 +63,7 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'signin' }: A
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 min-h-screen overflow-y-auto">
       {/* Backdrop */}
       <div 
         className="absolute inset-0 bg-black/50 backdrop-blur-sm"
@@ -71,9 +71,9 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'signin' }: A
       />
       
       {/* Modal */}
-      <div className="relative w-full max-w-md my-8 bg-white rounded-2xl shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto">
+      <div className="relative w-full max-w-md mx-auto my-4 bg-white rounded-2xl shadow-2xl max-h-[95vh] overflow-y-auto" style={{ marginTop: 'max(1rem, calc(50vh - 400px))', marginBottom: '1rem' }}>
         {/* Header */}
-        <div className="relative bg-gradient-to-r from-blue-600 to-blue-800 px-6 py-6 text-white">
+        <div className="relative bg-gradient-to-r from-blue-600 to-blue-800 px-6 py-4 text-white">
           <button
             onClick={onClose}
             className="absolute top-3 right-3 p-2 hover:bg-white/10 rounded-full transition-colors"
@@ -98,9 +98,9 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'signin' }: A
         </div>
 
         {/* Content */}
-        <div className="p-5">
+        <div className="p-4">
           {/* Social Login Buttons */}
-          <div className="space-y-2 mb-5">
+          <div className="space-y-2 mb-4">
             <button
               onClick={() => handleSocialLogin('google')}
               disabled={isLoading}
@@ -145,7 +145,7 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'signin' }: A
           )}
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-3">
             {mode === 'signup' && (
               <>
                 <div className="grid grid-cols-2 gap-3">
