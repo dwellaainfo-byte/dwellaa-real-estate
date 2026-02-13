@@ -58,8 +58,8 @@ export default function Header() {
                 +1 (555) 123-4567
               </Link>
               <span className="hidden sm:block">•</span>
-              <Link href="mailto:info@luxuryproperties.com" className="hidden sm:block hover:text-blue-600 transition-colors">
-                info@luxuryproperties.com
+              <Link href="mailto:dwellaainfo@gmail.com" className="hidden sm:block hover:text-blue-600 transition-colors">
+                dwellaainfo@gmail.com
               </Link>
             </div>
             <LanguageSelector />

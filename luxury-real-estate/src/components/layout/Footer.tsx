@@ -96,7 +96,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center space-x-3 text-gray-300">
                 <Mail size={18} className="text-luxury-gold" />
-                <span>info@luxuryproperties.com</span>
+                <span>dwellaainfo@gmail.com</span>
               </div>
             </div>
           </div>

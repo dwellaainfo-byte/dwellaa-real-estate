@@ -249,7 +249,7 @@ function transformSanityProperty(sanityProperty: any): Property {
       company: sanityProperty.listingAgent.company,
     } : {
       name: 'Luxury Properties Team',
-      email: 'info@luxuryproperties.com',
+      email: 'dwellaainfo@gmail.com',
       phone: '+1 (555) 123-4567',
       company: 'Luxury Properties International',
     },

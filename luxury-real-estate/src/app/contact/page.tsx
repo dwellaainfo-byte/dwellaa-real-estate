@@ -107,10 +107,10 @@ export default function ContactPage() {
                     <h3 className="font-semibold text-luxury-charcoal">Email Us</h3>
                     <p className="text-gray-600">We'll respond within 24 hours</p>
                     <a 
-                      href="mailto:info@luxuryproperties.com"
+                      href="mailto:dwellaainfo@gmail.com"
                       className="text-luxury-gold font-semibold hover:text-luxury-darkGold transition-colors"
                     >
-                      info@luxuryproperties.com
+                      dwellaainfo@gmail.com
                     </a>
                   </div>
                 </div>
