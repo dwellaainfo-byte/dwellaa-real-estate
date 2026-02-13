@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { X, Mail, Lock, User, Building2 } from 'lucide-react';
 import Button from '@/components/ui/Button';
+import { useAuth } from '@/contexts/AuthContext';
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -13,6 +14,7 @@ interface AuthModalProps {
 export default function AuthModal({ isOpen, onClose, initialMode = 'signin' }: AuthModalProps) {
   const [mode, setMode] = useState<'signin' | 'signup'>(initialMode);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -24,19 +26,34 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'signin' }: A
     acceptTerms: false
   });
 
+  const { login, register } = useAuth();
+
   if (!isOpen) return null;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    
-    // TODO: Implement authentication logic
-    console.log('Auth submission:', { mode, formData });
-    
-    setTimeout(() => {
-      setIsLoading(false);
+    setError('');
+
+    try {
+      if (mode === 'signin') {
+        await login(formData.email, formData.password);
+      } else {
+        await register({
+          email: formData.email,
+          password: formData.password,
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          agencyName: formData.agencyName,
+          phone: formData.phone,
+        });
+      }
       onClose();
-    }, 2000);
+    } catch (error: any) {
+      setError(error.message);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleSocialLogin = (provider: 'google' | 'apple') => {
@@ -119,6 +136,13 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'signin' }: A
               <span className="px-2 bg-white text-gray-500">Or continue with email</span>
             </div>
           </div>
+
+          {/* Error Message */}
+          {error && (
+            <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+              <p className="text-sm text-red-600">{error}</p>
+            </div>
+          )}
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4">

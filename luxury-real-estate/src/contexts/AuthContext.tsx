@@ -51,10 +51,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const checkAuthState = async () => {
     try {
-      // Check localStorage for user session
-      const storedUser = localStorage.getItem('user');
-      if (storedUser) {
-        setUser(JSON.parse(storedUser));
+      const response = await fetch('/api/auth/me');
+      const data = await response.json();
+      
+      if (data.user) {
+        setUser(data.user);
       }
     } catch (error) {
       console.error('Error checking auth state:', error);
@@ -66,22 +67,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const login = async (email: string, password: string) => {
     setIsLoading(true);
     try {
-      // TODO: Replace with actual API call
-      const mockUser: User = {
-        id: '1',
-        email,
-        firstName: 'John',
-        lastName: 'Doe',
-        agencyName: 'Premium Realty',
-        savedSearches: [],
-        favoriteProperties: [],
-        createdAt: new Date().toISOString()
-      };
-      
-      setUser(mockUser);
-      localStorage.setItem('user', JSON.stringify(mockUser));
-    } catch (error) {
-      throw new Error('Login failed. Please check your credentials.');
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Login failed');
+      }
+
+      setUser(data.user);
+    } catch (error: any) {
+      throw new Error(error.message || 'Login failed. Please check your credentials.');
     } finally {
       setIsLoading(false);
     }
@@ -90,85 +90,116 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const register = async (userData: RegisterData) => {
     setIsLoading(true);
     try {
-      // TODO: Replace with actual API call
-      const newUser: User = {
-        id: Date.now().toString(),
-        email: userData.email,
-        firstName: userData.firstName,
-        lastName: userData.lastName,
-        agencyName: userData.agencyName,
-        phone: userData.phone,
-        savedSearches: [],
-        favoriteProperties: [],
-        createdAt: new Date().toISOString()
-      };
-      
-      setUser(newUser);
-      localStorage.setItem('user', JSON.stringify(newUser));
-    } catch (error) {
-      throw new Error('Registration failed. Please try again.');
+      const response = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(userData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Registration failed');
+      }
+
+      setUser(data.user);
+    } catch (error: any) {
+      throw new Error(error.message || 'Registration failed. Please try again.');
     } finally {
       setIsLoading(false);
     }
   };
 
-  const logout = () => {
+  const logout = async () => {
+    try {
+      await fetch('/api/auth/logout', { method: 'POST' });
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
     setUser(null);
-    localStorage.removeItem('user');
   };
 
   const updateUser = (userData: Partial<User>) => {
     if (user) {
       const updatedUser = { ...user, ...userData };
       setUser(updatedUser);
-      localStorage.setItem('user', JSON.stringify(updatedUser));
     }
   };
 
-  const addToFavorites = (propertyId: string) => {
-    if (user && !user.favoriteProperties.includes(propertyId)) {
-      const updatedUser = {
-        ...user,
-        favoriteProperties: [...user.favoriteProperties, propertyId]
-      };
-      setUser(updatedUser);
-      localStorage.setItem('user', JSON.stringify(updatedUser));
+  const addToFavorites = async (propertyId: string) => {
+    if (!user || user.favoriteProperties.includes(propertyId)) return;
+
+    try {
+      const response = await fetch('/api/favorites', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ propertyId, action: 'add' }),
+      });
+
+      if (response.ok) {
+        const updatedUser = {
+          ...user,
+          favoriteProperties: [...user.favoriteProperties, propertyId]
+        };
+        setUser(updatedUser);
+      }
+    } catch (error) {
+      console.error('Error adding to favorites:', error);
     }
   };
 
-  const removeFromFavorites = (propertyId: string) => {
-    if (user) {
-      const updatedUser = {
-        ...user,
-        favoriteProperties: user.favoriteProperties.filter(id => id !== propertyId)
-      };
-      setUser(updatedUser);
-      localStorage.setItem('user', JSON.stringify(updatedUser));
+  const removeFromFavorites = async (propertyId: string) => {
+    if (!user) return;
+
+    try {
+      const response = await fetch('/api/favorites', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ propertyId, action: 'remove' }),
+      });
+
+      if (response.ok) {
+        const updatedUser = {
+          ...user,
+          favoriteProperties: user.favoriteProperties.filter(id => id !== propertyId)
+        };
+        setUser(updatedUser);
+      }
+    } catch (error) {
+      console.error('Error removing from favorites:', error);
     }
   };
 
-  const saveSearch = (searchData: any) => {
-    if (user) {
+  const saveSearch = async (searchData: any) => {
+    if (!user) return;
+
+    try {
+      // TODO: Create saved searches API endpoint
       const searchId = Date.now().toString();
       const updatedUser = {
         ...user,
         savedSearches: [...user.savedSearches, searchId]
       };
       setUser(updatedUser);
-      localStorage.setItem('user', JSON.stringify(updatedUser));
-      localStorage.setItem(`search_${searchId}`, JSON.stringify(searchData));
+      console.log('Save search:', searchData);
+    } catch (error) {
+      console.error('Error saving search:', error);
     }
   };
 
-  const removeSavedSearch = (searchId: string) => {
-    if (user) {
+  const removeSavedSearch = async (searchId: string) => {
+    if (!user) return;
+
+    try {
+      // TODO: Create saved searches API endpoint
       const updatedUser = {
         ...user,
         savedSearches: user.savedSearches.filter(id => id !== searchId)
       };
       setUser(updatedUser);
-      localStorage.setItem('user', JSON.stringify(updatedUser));
-      localStorage.removeItem(`search_${searchId}`);
+      console.log('Remove search:', searchId);
+    } catch (error) {
+      console.error('Error removing saved search:', error);
     }
   };
 
