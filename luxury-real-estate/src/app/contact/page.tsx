@@ -59,7 +59,7 @@ export default function ContactPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-subtle">
+    <div className="min-h-screen bg-gradient-subtle pt-60">
       <div className="container-luxury py-12">
         {/* Header */}
         <div className="text-center mb-16">
