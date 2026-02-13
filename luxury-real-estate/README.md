@@ -262,3 +262,4 @@ For questions and support:
 ---
 
 **Made with ❤️ for the luxury real estate industry**# Build trigger
+# Force Next.js build
