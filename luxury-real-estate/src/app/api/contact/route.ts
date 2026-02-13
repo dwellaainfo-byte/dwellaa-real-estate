@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Email content
+    // Email content - send to actual business email
     const emailContent = {
       to: 'dwellaainfo@gmail.com',
       subject: `New ${inquiryType} inquiry from ${firstName} ${lastName}`,

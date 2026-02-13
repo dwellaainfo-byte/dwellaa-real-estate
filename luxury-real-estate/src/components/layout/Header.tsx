@@ -37,15 +37,16 @@ export default function Header() {
       <div className="container-luxury">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center">
-            <Image 
-              src="/dwellaa-logo.jpg"
-              alt="Dwellaa - Next-Gen Property Platform"
-              width={180}
-              height={60}
-              className="h-12 w-auto object-contain hover:scale-105 transition-transform duration-200"
-              priority
-            />
+          <Link href="/" className="flex items-center space-x-3">
+            <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-blue-800 rounded-lg flex items-center justify-center">
+              <Home className="w-6 h-6 text-white" />
+            </div>
+            <div className="hidden sm:block">
+              <h1 className="text-xl font-serif font-bold text-gray-800">
+                Luxury Properties
+              </h1>
+              <p className="text-xs text-gray-500 -mt-1">International</p>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}

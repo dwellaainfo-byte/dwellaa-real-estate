@@ -97,6 +97,34 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Dwellaa Brand Section */}
+      <section className="py-20 bg-white">
+        <div className="container-luxury">
+          <div className="text-center">
+            <div className="mb-8">
+              <h2 className="text-2xl font-medium text-gray-600 mb-6">Powered By</h2>
+              <div className="flex justify-center">
+                <Image 
+                  src="/dwellaa-logo.jpg"
+                  alt="Dwellaa - Next-Gen Property Platform"
+                  width={600}
+                  height={200}
+                  className="h-32 w-auto object-contain hover:scale-105 transition-transform duration-300"
+                  priority
+                />
+              </div>
+            </div>
+            <div className="max-w-3xl mx-auto">
+              <p className="text-xl text-gray-700 leading-relaxed">
+                Experience the future of luxury real estate with Dwellaa's revolutionary platform. 
+                Our cutting-edge technology connects you with the world's most exclusive properties 
+                through an intuitive, next-generation interface designed for discerning clients.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Featured Properties */}
       <section className="py-20 bg-gradient-subtle">
         <div className="container-luxury">
