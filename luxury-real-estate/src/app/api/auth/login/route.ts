@@ -4,6 +4,14 @@ import { verifyPassword, generateToken } from '@/lib/auth';
 
 export async function POST(req: NextRequest) {
   try {
+    // Check if database is available
+    if (!process.env.DATABASE_URL) {
+      return NextResponse.json(
+        { error: 'Database not configured' },
+        { status: 503 }
+      );
+    }
+
     const body = await req.json();
     const { email, password } = body;
 

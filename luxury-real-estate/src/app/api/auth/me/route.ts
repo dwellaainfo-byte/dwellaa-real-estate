@@ -4,6 +4,11 @@ import { verifyToken } from '@/lib/auth';
 
 export async function GET(req: NextRequest) {
   try {
+    // Check if database is available
+    if (!process.env.DATABASE_URL) {
+      return NextResponse.json({ user: null });
+    }
+
     const token = req.cookies.get('auth-token')?.value;
     
     if (!token) {

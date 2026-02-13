@@ -5,6 +5,11 @@ import { verifyToken } from '@/lib/auth';
 // Get user's favorites
 export async function GET(req: NextRequest) {
   try {
+    // Check if database is available
+    if (!process.env.DATABASE_URL) {
+      return NextResponse.json({ favorites: [] });
+    }
+
     const token = req.cookies.get('auth-token')?.value;
     
     if (!token) {
@@ -46,6 +51,11 @@ export async function GET(req: NextRequest) {
 // Add/Remove favorite
 export async function POST(req: NextRequest) {
   try {
+    // Check if database is available
+    if (!process.env.DATABASE_URL) {
+      return NextResponse.json({ error: 'Database not configured' }, { status: 503 });
+    }
+
     const token = req.cookies.get('auth-token')?.value;
     
     if (!token) {
