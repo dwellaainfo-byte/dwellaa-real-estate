@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Menu, X, Home, Search, Users, Mail, Phone } from 'lucide-react';
 import Button from '@/components/ui/Button';
 
@@ -36,16 +37,15 @@ export default function Header() {
       <div className="container-luxury">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-luxury rounded-lg flex items-center justify-center">
-              <Home className="w-6 h-6 text-white" />
-            </div>
-            <div className="hidden sm:block">
-              <h1 className="text-xl font-serif font-bold text-luxury-charcoal">
-                Luxury Properties
-              </h1>
-              <p className="text-xs text-gray-500 -mt-1">International</p>
-            </div>
+          <Link href="/" className="flex items-center">
+            <Image 
+              src="/dwellaa-logo.jpg"
+              alt="Dwellaa - Next-Gen Property Platform"
+              width={180}
+              height={60}
+              className="h-12 w-auto object-contain hover:scale-105 transition-transform duration-200"
+              priority
+            />
           </Link>
 
           {/* Desktop Navigation */}

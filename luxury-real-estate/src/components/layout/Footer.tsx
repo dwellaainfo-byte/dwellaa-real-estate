@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Home, Mail, Phone, MapPin, Instagram, Facebook, Twitter, Linkedin } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
@@ -69,19 +70,19 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* Company Info */}
           <div className="lg:col-span-2">
-            <Link href="/" className="flex items-center space-x-3 mb-6">
-              <div className="w-12 h-12 bg-gradient-luxury rounded-lg flex items-center justify-center">
-                <Home className="w-7 h-7 text-white" />
-              </div>
-              <div>
-                <h2 className="text-xl font-serif font-bold">Luxury Properties</h2>
-                <p className="text-gray-400 text-sm">International</p>
-              </div>
+            <Link href="/" className="flex items-center mb-6">
+              <Image 
+                src="/dwellaa-logo.jpg"
+                alt="Dwellaa - Next-Gen Property Platform"
+                width={200}
+                height={67}
+                className="h-16 w-auto object-contain hover:scale-105 transition-transform duration-200"
+              />
             </Link>
             
             <p className="text-gray-300 mb-6 leading-relaxed">
-              For over two decades, we have been the premier destination for luxury real estate, 
-              connecting discerning clients with exceptional properties worldwide.
+              Dwellaa is your next-generation property platform, revolutionizing how you discover, 
+              buy, and sell luxury real estate with cutting-edge technology and personalized service.
             </p>
 
             <div className="space-y-3">
@@ -95,7 +96,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center space-x-3 text-gray-300">
                 <Mail size={18} className="text-luxury-gold" />
-                <span>info@luxuryproperties.com</span>
+                <span>dwellaainfo@gmail.com</span>
               </div>
             </div>
           </div>
@@ -176,7 +177,7 @@ export default function Footer() {
         <div className="container-luxury py-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-gray-400 text-sm">
-              © 2025 Luxury Properties International. All rights reserved.
+              © 2025 Dwellaa. All rights reserved.
             </div>
             <div className="flex space-x-6 text-sm text-gray-400">
               <Link href="/privacy" className="hover:text-luxury-gold transition-colors">

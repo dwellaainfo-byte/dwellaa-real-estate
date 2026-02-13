@@ -15,18 +15,18 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  title: 'Luxury Properties International - Premier Real Estate',
-  description: 'Discover the world\'s most exclusive luxury properties. From oceanfront estates to penthouse apartments, find your perfect luxury home with our expert team.',
-  keywords: 'luxury real estate, premium properties, luxury homes, exclusive listings, high-end real estate, luxury estates, penthouse apartments, waterfront properties',
-  authors: [{ name: 'Luxury Properties International' }],
+  title: 'Dwellaa - Next-Gen Property Platform | Luxury Real Estate',
+  description: 'Discover luxury properties with Dwellaa\'s revolutionary platform. From oceanfront estates to penthouse apartments, find your perfect luxury home with cutting-edge technology.',
+  keywords: 'dwellaa, luxury real estate, premium properties, luxury homes, exclusive listings, high-end real estate, luxury estates, penthouse apartments, waterfront properties, property platform',
+  authors: [{ name: 'Dwellaa' }],
   viewport: 'width=device-width, initial-scale=1',
   robots: 'index, follow',
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    siteName: 'Luxury Properties International',
-    title: 'Luxury Properties International - Premier Real Estate',
-    description: 'Discover the world\'s most exclusive luxury properties. From oceanfront estates to penthouse apartments, find your perfect luxury home.',
+    siteName: 'Dwellaa',
+    title: 'Dwellaa - Next-Gen Property Platform | Luxury Real Estate',
+    description: 'Discover luxury properties with Dwellaa\'s revolutionary platform. From oceanfront estates to penthouse apartments, find your perfect luxury home.',
     images: [
       {
         url: '/images/og-image.jpg',
