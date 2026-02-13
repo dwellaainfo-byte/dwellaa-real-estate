@@ -63,7 +63,7 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'signin' }: A
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
       {/* Backdrop */}
       <div 
         className="absolute inset-0 bg-black/50 backdrop-blur-sm"
@@ -71,26 +71,26 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'signin' }: A
       />
       
       {/* Modal */}
-      <div className="relative w-full max-w-md mx-4 bg-white rounded-2xl shadow-2xl overflow-hidden">
+      <div className="relative w-full max-w-md my-8 bg-white rounded-2xl shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto">
         {/* Header */}
-        <div className="relative bg-gradient-to-r from-blue-600 to-blue-800 px-6 py-8 text-white">
+        <div className="relative bg-gradient-to-r from-blue-600 to-blue-800 px-6 py-6 text-white">
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 p-2 hover:bg-white/10 rounded-full transition-colors"
+            className="absolute top-3 right-3 p-2 hover:bg-white/10 rounded-full transition-colors"
           >
-            <X size={20} />
+            <X size={18} />
           </button>
           
           <div className="text-center">
-            <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Building2 size={32} />
+            <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-3">
+              <Building2 size={24} />
             </div>
-            <h2 className="text-2xl font-bold mb-2">
+            <h2 className="text-xl font-bold mb-2">
               {mode === 'signin' ? 'Welcome Back' : 'Join Our Network'}
             </h2>
-            <p className="text-blue-100">
+            <p className="text-sm text-blue-100">
               {mode === 'signin' 
-                ? 'Sign in to save searches, save your favorite properties, and more.' 
+                ? 'Sign in to save searches and favorite properties.' 
                 : 'Create your agency profile and start saving properties.'
               }
             </p>
@@ -98,9 +98,9 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'signin' }: A
         </div>
 
         {/* Content */}
-        <div className="p-6">
+        <div className="p-5">
           {/* Social Login Buttons */}
-          <div className="space-y-3 mb-6">
+          <div className="space-y-2 mb-5">
             <button
               onClick={() => handleSocialLogin('google')}
               disabled={isLoading}
@@ -128,7 +128,7 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'signin' }: A
           </div>
 
           {/* Divider */}
-          <div className="relative mb-6">
+          <div className="relative mb-4">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-gray-300" />
             </div>
