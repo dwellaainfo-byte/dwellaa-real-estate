@@ -1,0 +1,52 @@
+{
+  "nav": {
+    "properties": "Propriétés",
+    "team": "Notre Équipe", 
+    "contact": "Contact",
+    "signIn": "Se Connecter",
+    "join": "Rejoindre",
+    "listProperty": "Lister Votre Propriété",
+    "scheduleViewing": "Programmer une Visite"
+  },
+  "propertyTypes": {
+    "buy": "Acheter",
+    "rent": "Louer", 
+    "sell": "Vendre"
+  },
+  "home": {
+    "title": "Propriétés de Luxe International",
+    "subtitle": "Découvrez les Propriétés les Plus Exclusives au Monde",
+    "heroDescription": "Des penthouses de Manhattan aux villas méditerranéennes, nous sélectionnons l'immobilier de luxe le plus raffiné au monde.",
+    "searchPlaceholder": "Rechercher par lieu, type de propriété...",
+    "featuredProperties": "Propriétés en Vedette",
+    "viewAll": "Voir Toutes les Propriétés"
+  },
+  "contact": {
+    "title": "Nous Contacter",
+    "subtitle": "Entrer en Contact",
+    "description": "Prêt à trouver la propriété de vos rêves ? Notre équipe d'experts est là pour vous aider.",
+    "phone": "Téléphone",
+    "email": "E-mail",
+    "offices": "Nos Bureaux",
+    "services": "Nos Services",
+    "responseTime": "Nous répondrons dans les 24 heures"
+  },
+  "properties": {
+    "title": "Propriétés de Luxe",
+    "filters": "Filtres",
+    "priceRange": "Gamme de Prix", 
+    "propertyType": "Type de Propriété",
+    "bedrooms": "Chambres",
+    "location": "Emplacement"
+  },
+  "footer": {
+    "company": "Propriétés de Luxe International",
+    "description": "Votre partenaire de confiance dans l'immobilier de luxe mondial.",
+    "quickLinks": "Liens Rapides",
+    "contact": "Contact",
+    "followUs": "Nous Suivre",
+    "allRights": "Tous droits réservés.",
+    "privacy": "Politique de Confidentialité",
+    "terms": "Conditions d'Utilisation"
+  }
+}

@@ -1,6 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useLocale } from 'next-intl';
+import { useRouter, usePathname } from 'next/navigation';
 import { ChevronDown } from 'lucide-react';
 
 interface Language {
@@ -11,17 +13,32 @@ interface Language {
 
 const languages: Language[] = [
   { code: 'en', name: 'ENGLISH', flag: '🇺🇸' },
+  { code: 'fr', name: 'FRANÇAIS', flag: '🇫🇷' },
+  { code: 'it', name: 'ITALIANO', flag: '🇮🇹' },
 ];
 
 export default function LanguageSelector() {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState(languages[0]);
+  const locale = useLocale();
+  const router = useRouter();
+  const pathname = usePathname();
+  
+  const selectedLanguage = languages.find(lang => lang.code === locale) || languages[0];
 
   const handleLanguageChange = (language: Language) => {
-    setSelectedLanguage(language);
     setIsOpen(false);
-    // Here you would implement actual language switching logic
-    console.log(`Language changed to: ${language.code}`);
+    
+    // Remove current locale from pathname if it exists
+    const pathnameWithoutLocale = pathname.startsWith(`/${locale}`) 
+      ? pathname.slice(`/${locale}`.length)
+      : pathname;
+    
+    // Navigate to new locale
+    const newPath = language.code === 'en' 
+      ? pathnameWithoutLocale || '/'
+      : `/${language.code}${pathnameWithoutLocale || ''}`;
+      
+    router.push(newPath);
   };
 
   return (

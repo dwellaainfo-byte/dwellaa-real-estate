@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import { Menu, X, Home, Search, Users, Mail, Phone, UserPlus, LogIn } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import LanguageSelector from '@/components/ui/LanguageSelector';
@@ -19,6 +20,7 @@ export default function Header() {
   const [authModalMode, setAuthModalMode] = useState<'signin' | 'signup'>('signin');
   
   const { isAuthenticated, isLoading } = useAuth();
+  const t = useTranslations();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,15 +32,15 @@ export default function Header() {
   }, []);
 
   const propertyTabs = [
-    { id: 'buy', name: 'Buy', href: '/properties?type=sale' },
-    { id: 'rent', name: 'Rent', href: '/properties?type=rent' },
-    { id: 'sell', name: 'Sell', href: '/sell' },
+    { id: 'buy', name: t('propertyTypes.buy'), href: '/properties?type=sale' },
+    { id: 'rent', name: t('propertyTypes.rent'), href: '/properties?type=rent' },
+    { id: 'sell', name: t('propertyTypes.sell'), href: '/sell' },
   ];
 
   const navigation = [
-    { name: 'Properties', href: '/properties', icon: Home },
-    { name: 'Our Team', href: '/team', icon: Users },
-    { name: 'Contact', href: '/contact', icon: Mail },
+    { name: t('nav.properties'), href: '/properties', icon: Home },
+    { name: t('nav.team'), href: '/team', icon: Users },
+    { name: t('nav.contact'), href: '/contact', icon: Mail },
   ];
 
   return (
@@ -77,9 +79,8 @@ export default function Header() {
             </div>
             <div className="hidden sm:block">
               <h1 className="text-xl font-serif font-bold text-gray-800">
-                Luxury Properties
+                {t('home.title')}
               </h1>
-              <p className="text-xs text-gray-500 -mt-1">International</p>
             </div>
           </Link>
 
@@ -111,7 +112,7 @@ export default function Header() {
                   className="flex items-center space-x-2"
                 >
                   <LogIn size={16} />
-                  <span>Sign In</span>
+                  <span>{t('nav.signIn')}</span>
                 </Button>
                 <Button 
                   variant="primary" 
@@ -123,16 +124,16 @@ export default function Header() {
                   className="flex items-center space-x-2"
                 >
                   <UserPlus size={16} />
-                  <span>Join</span>
+                  <span>{t('nav.join')}</span>
                 </Button>
               </>
             ) : (
               <>
                 <Button variant="outline" size="sm">
-                  List Your Property
+                  {t('nav.listProperty')}
                 </Button>
                 <Button variant="primary" size="sm">
-                  Schedule Viewing
+                  {t('nav.scheduleViewing')}
                 </Button>
                 <UserMenu />
               </>
@@ -222,7 +223,7 @@ export default function Header() {
                       }}
                     >
                       <LogIn size={16} />
-                      <span>Sign In</span>
+                      <span>{t('nav.signIn')}</span>
                     </Button>
                     <Button 
                       variant="primary" 
@@ -234,16 +235,16 @@ export default function Header() {
                       }}
                     >
                       <UserPlus size={16} />
-                      <span>Join</span>
+                      <span>{t('nav.join')}</span>
                     </Button>
                   </>
                 ) : (
                   <>
                     <Button variant="outline" className="w-full">
-                      List Your Property
+                      {t('nav.listProperty')}
                     </Button>
                     <Button variant="primary" className="w-full">
-                      Schedule Viewing
+                      {t('nav.scheduleViewing')}
                     </Button>
                   </>
                 )}
