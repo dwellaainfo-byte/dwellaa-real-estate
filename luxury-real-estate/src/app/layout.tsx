@@ -4,6 +4,7 @@ import './globals.css'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import { AuthProvider } from '@/contexts/AuthContext'
+import SessionProvider from '@/components/providers/SessionProvider'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -53,15 +54,17 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
       <body className="font-sans antialiased">
-        <AuthProvider>
-          <div className="min-h-screen flex flex-col">
-            <Header />
-            <main className="flex-1 pt-20">
-              {children}
-            </main>
-            <Footer />
-          </div>
-        </AuthProvider>
+        <SessionProvider>
+          <AuthProvider>
+            <div className="min-h-screen flex flex-col">
+              <Header />
+              <main className="flex-1 pt-20">
+                {children}
+              </main>
+              <Footer />
+            </div>
+          </AuthProvider>
+        </SessionProvider>
       </body>
     </html>
   )

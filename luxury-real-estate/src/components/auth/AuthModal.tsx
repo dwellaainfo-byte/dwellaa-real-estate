@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { signIn } from 'next-auth/react';
 import { X, Mail, Lock, User, Building2 } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import { useAuth } from '@/contexts/AuthContext';
@@ -61,37 +62,20 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'signin' }: A
     setError('');
     
     try {
-      // Mock successful social login
-      const mockUser = {
-        id: Date.now().toString(),
-        email: `user@${provider}.com`,
-        firstName: provider === 'google' ? 'Google' : 'Apple',
-        lastName: 'User',
-        agencyName: `${provider.charAt(0).toUpperCase() + provider.slice(1)} Real Estate`,
-        phone: null,
-        avatar: null,
-        createdAt: new Date().toISOString(),
-        favoriteProperties: [],
-        savedSearches: [],
-      };
+      // Use NextAuth to redirect to real OAuth provider
+      const result = await signIn(provider, {
+        callbackUrl: window.location.origin,
+        redirect: false,
+      });
 
-      // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      // Update auth context (mock)
-      if (register) {
-        await register({
-          email: mockUser.email,
-          password: 'mock-password',
-          firstName: mockUser.firstName,
-          lastName: mockUser.lastName,
-          agencyName: mockUser.agencyName,
-        });
+      if (result?.error) {
+        setError(`${provider.charAt(0).toUpperCase() + provider.slice(1)} sign-in failed. Please try again.`);
+      } else {
+        // Success - NextAuth will handle the redirect
+        onClose();
       }
-      
-      onClose();
     } catch (error) {
-      setError(`${provider.charAt(0).toUpperCase() + provider.slice(1)} sign-in will be available once we set up the production database.`);
+      setError(`${provider.charAt(0).toUpperCase() + provider.slice(1)} sign-in is not available yet. Please use email sign-in.`);
     } finally {
       setIsLoading(false);
     }
