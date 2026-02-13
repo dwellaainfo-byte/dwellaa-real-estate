@@ -11,3 +11,9 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   line-height: 1.2;
 }
+
+/* Blue luxury theme */
+.text-luxury-gold { color: #1e40af; }
+.bg-luxury-gold { background-color: #1e40af; }
+.border-luxury-gold { border-color: #1e40af; }
+.hover\:bg-luxury-gold:hover { background-color: #1d4ed8; }

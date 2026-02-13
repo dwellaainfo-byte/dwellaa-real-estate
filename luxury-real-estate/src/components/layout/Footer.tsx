@@ -176,7 +176,7 @@ export default function Footer() {
         <div className="container-luxury py-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-gray-400 text-sm">
-              © 2024 Luxury Properties International. All rights reserved.
+              © 2025 Luxury Properties International. All rights reserved.
             </div>
             <div className="flex space-x-6 text-sm text-gray-400">
               <Link href="/privacy" className="hover:text-luxury-gold transition-colors">

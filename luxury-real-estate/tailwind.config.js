@@ -9,7 +9,8 @@ module.exports = {
     extend: {
       colors: {
         luxury: {
-          gold: '#d4af37',
+          gold: '#1e40af',      // Blue instead of gold
+          darkGold: '#1d4ed8',  // Darker blue
           charcoal: '#2d2d2d',
         }
       }

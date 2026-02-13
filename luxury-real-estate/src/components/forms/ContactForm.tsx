@@ -133,9 +133,9 @@ export default function ContactForm({
               {inquiryOptions.map((option) => (
                 <label
                   key={option.value}
-                  className={`relative cursor-pointer rounded-lg border p-3 text-center hover:border-luxury-gold transition-colors ${
+                  className={`relative cursor-pointer rounded-lg border p-3 text-center hover:border-blue-500 transition-colors ${
                     inquiryType === option.value
-                      ? 'border-luxury-gold bg-luxury-gold/5'
+                      ? 'border-blue-500 bg-blue-50'
                       : 'border-gray-200'
                   }`}
                 >
@@ -226,7 +226,7 @@ export default function ContactForm({
           <div className="text-xs text-gray-500 bg-gray-50 p-3 rounded-lg">
             <p>
               By submitting this form, you agree to our{' '}
-              <a href="/privacy" className="text-luxury-gold hover:underline">
+              <a href="/privacy" className="text-blue-600 hover:underline">
                 Privacy Policy
               </a>{' '}
               and consent to being contacted by our team regarding your inquiry.
@@ -237,7 +237,7 @@ export default function ContactForm({
           <Button
             type="submit"
             loading={isSubmitting}
-            className="w-full"
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-6 rounded-lg transition-colors shadow-lg"
             size={compact ? 'md' : 'lg'}
           >
             <Send size={18} className="mr-2" />
@@ -256,7 +256,7 @@ export default function ContactForm({
               </p>
               <a 
                 href="tel:+1-555-123-4567"
-                className="text-luxury-gold font-semibold hover:text-luxury-darkGold transition-colors"
+                className="text-blue-600 font-semibold hover:text-blue-700 transition-colors"
               >
                 +1 (555) 123-4567
               </a>
