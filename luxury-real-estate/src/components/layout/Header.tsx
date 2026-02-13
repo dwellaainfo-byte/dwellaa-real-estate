@@ -114,30 +114,40 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Buy/Rent/Sell Tabs & Search Bar */}
+      {/* Big Property Type Tabs - Sotheby's Style */}
+      <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+        <div className="container-luxury">
+          <div className="flex justify-center">
+            {propertyTabs.map((tab, index) => (
+              <Link
+                key={tab.id}
+                href={tab.href}
+                onClick={() => setActiveTab(tab.id)}
+                className={`relative px-12 py-6 text-2xl font-bold transition-all duration-300 ${
+                  activeTab === tab.id
+                    ? 'bg-white/20 text-white'
+                    : 'text-white/80 hover:text-white hover:bg-white/10'
+                } ${
+                  index === 0 ? 'rounded-l-lg' : ''
+                } ${
+                  index === propertyTabs.length - 1 ? 'rounded-r-lg' : ''
+                }`}
+              >
+                {tab.name}
+                {activeTab === tab.id && (
+                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-white rounded-full" />
+                )}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Location Search Section */}
       <div className="border-t border-gray-100 bg-white">
         <div className="container-luxury">
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between py-4 space-y-4 lg:space-y-0">
-            {/* Property Tabs */}
-            <div className="flex items-center space-x-1 bg-gray-100 rounded-lg p-1">
-              {propertyTabs.map((tab) => (
-                <Link
-                  key={tab.id}
-                  href={tab.href}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`px-6 py-3 rounded-md font-semibold text-sm transition-all ${
-                    activeTab === tab.id
-                      ? 'bg-white text-blue-600 shadow-sm'
-                      : 'text-gray-600 hover:text-blue-600 hover:bg-white/50'
-                  }`}
-                >
-                  {tab.name}
-                </Link>
-              ))}
-            </div>
-
-            {/* Location Search */}
-            <div className="flex-1 max-w-2xl lg:ml-8">
+          <div className="py-6">
+            <div className="max-w-4xl mx-auto">
               <LocationSearch />
             </div>
           </div>

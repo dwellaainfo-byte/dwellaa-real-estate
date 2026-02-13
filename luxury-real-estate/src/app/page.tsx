@@ -42,7 +42,7 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="min-h-screen pt-52">
+    <div className="min-h-screen pt-72">
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         {/* Background Image */}
