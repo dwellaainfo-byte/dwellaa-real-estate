@@ -1,17 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/db';
-import { verifyPassword, generateToken } from '@/lib/auth';
 
 export async function POST(req: NextRequest) {
   try {
-    // Check if database is available
-    if (!process.env.DATABASE_URL) {
-      return NextResponse.json(
-        { error: 'Database not configured' },
-        { status: 503 }
-      );
-    }
-
     const body = await req.json();
     const { email, password } = body;
 
@@ -22,61 +12,29 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Find user
-    const user = await prisma.user.findUnique({
-      where: { email: email.toLowerCase() },
-      select: {
-        id: true,
-        email: true,
-        password: true,
-        firstName: true,
-        lastName: true,
-        agencyName: true,
-        phone: true,
-        avatar: true,
-        createdAt: true,
-        favoriteProperties: {
-          select: { id: true }
-        },
-        savedSearches: {
-          select: { id: true }
-        }
-      }
-    });
+    // Mock successful login response
+    const mockUser = {
+      id: '1',
+      email: email.toLowerCase(),
+      firstName: 'John',
+      lastName: 'Doe',
+      agencyName: 'Premium Realty',
+      phone: null,
+      avatar: null,
+      createdAt: new Date().toISOString(),
+      favoriteProperties: [],
+      savedSearches: [],
+    };
 
-    if (!user || !user.password) {
-      return NextResponse.json(
-        { error: 'Invalid credentials' },
-        { status: 401 }
-      );
-    }
+    // Mock token
+    const token = 'mock-jwt-token';
 
-    // Verify password
-    const isValidPassword = await verifyPassword(password, user.password);
-    if (!isValidPassword) {
-      return NextResponse.json(
-        { error: 'Invalid credentials' },
-        { status: 401 }
-      );
-    }
-
-    // Generate token
-    const token = generateToken(user.id);
-
-    // Remove password from response
-    const { password: _, ...userWithoutPassword } = user;
-
-    // Create response
     const response = NextResponse.json({
-      user: {
-        ...userWithoutPassword,
-        favoriteProperties: user.favoriteProperties.map(p => p.id),
-        savedSearches: user.savedSearches.map(s => s.id),
-      },
+      user: mockUser,
       token
     });
 
-    // Set HTTP-only cookie
+    // Set mock cookie
     response.cookies.set('auth-token', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',

@@ -1,18 +1,10 @@
-import { PrismaClient } from '@prisma/client';
+// Temporary mock database for deployment
+// Will be replaced with real Prisma client once database is set up
 
-const globalForPrisma = globalThis as unknown as {
-  prisma: PrismaClient | undefined;
-};
-
-let prisma: PrismaClient;
-
-if (process.env.NODE_ENV === 'production') {
-  prisma = new PrismaClient();
-} else {
-  if (!globalForPrisma.prisma) {
-    globalForPrisma.prisma = new PrismaClient();
+export const prisma = {
+  user: {
+    findUnique: () => Promise.resolve(null),
+    create: () => Promise.resolve(null),
+    update: () => Promise.resolve(null),
   }
-  prisma = globalForPrisma.prisma;
-}
-
-export { prisma };
+} as any;

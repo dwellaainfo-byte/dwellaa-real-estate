@@ -1,57 +1,32 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/db';
-import { verifyToken } from '@/lib/auth';
 
 export async function GET(req: NextRequest) {
   try {
-    // Check if database is available
-    if (!process.env.DATABASE_URL) {
-      return NextResponse.json({ user: null });
-    }
-
     const token = req.cookies.get('auth-token')?.value;
     
-    if (!token) {
-      return NextResponse.json({ user: null });
-    }
+    if (!token || token === 'mock-jwt-token') {
+      // Return mock user for demo purposes
+      if (token === 'mock-jwt-token') {
+        const mockUser = {
+          id: '1',
+          email: 'demo@example.com',
+          firstName: 'John',
+          lastName: 'Doe',
+          agencyName: 'Premium Realty',
+          phone: null,
+          avatar: null,
+          createdAt: new Date().toISOString(),
+          favoriteProperties: [],
+          savedSearches: [],
+        };
 
-    const decoded = verifyToken(token);
-    if (!decoded) {
-      return NextResponse.json({ user: null });
-    }
-
-    // Get user from database
-    const user = await prisma.user.findUnique({
-      where: { id: decoded.userId },
-      select: {
-        id: true,
-        email: true,
-        firstName: true,
-        lastName: true,
-        agencyName: true,
-        phone: true,
-        avatar: true,
-        createdAt: true,
-        favoriteProperties: {
-          select: { id: true }
-        },
-        savedSearches: {
-          select: { id: true }
-        }
+        return NextResponse.json({ user: mockUser });
       }
-    });
-
-    if (!user) {
+      
       return NextResponse.json({ user: null });
     }
 
-    return NextResponse.json({
-      user: {
-        ...user,
-        favoriteProperties: user.favoriteProperties.map(p => p.id),
-        savedSearches: user.savedSearches.map(s => s.id),
-      }
-    });
+    return NextResponse.json({ user: null });
   } catch (error) {
     console.error('Auth check error:', error);
     return NextResponse.json({ user: null });
