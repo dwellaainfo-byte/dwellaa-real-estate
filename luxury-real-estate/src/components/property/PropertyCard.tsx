@@ -7,6 +7,7 @@ import { Heart, MapPin, Bed, Bath, Square, Calendar } from 'lucide-react';
 import { Property } from '@/types';
 import { formatPrice, formatArea, getPropertyUrl } from '@/lib/utils';
 import { Card } from '@/components/ui/Card';
+import PropertyFavoriteButton from '@/components/property/PropertyFavoriteButton';
 
 interface PropertyCardProps {
   property: Property;
@@ -14,17 +15,10 @@ interface PropertyCardProps {
 }
 
 export default function PropertyCard({ property, featured = false }: PropertyCardProps) {
-  const [isFavorite, setIsFavorite] = useState(false);
   const [imageError, setImageError] = useState(false);
 
   const mainImage = property.images.find(img => img.isMainImage) || property.images[0];
   const propertyUrl = getPropertyUrl(property);
-
-  const handleFavoriteClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsFavorite(!isFavorite);
-  };
 
   return (
     <Card 
@@ -79,17 +73,12 @@ export default function PropertyCard({ property, featured = false }: PropertyCar
           )}
 
           {/* Favorite Button */}
-          <button
-            onClick={handleFavoriteClick}
-            className="absolute top-4 right-4 w-10 h-10 bg-white/90 hover:bg-white rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110"
-          >
-            <Heart 
-              size={20} 
-              className={`transition-colors duration-200 ${
-                isFavorite ? 'text-red-500 fill-red-500' : 'text-gray-600'
-              }`} 
+          <div className="absolute top-4 right-4">
+            <PropertyFavoriteButton 
+              propertyId={property.id} 
+              size="md"
             />
-          </button>
+          </div>
 
           {/* Price Overlay (visible on hover) */}
           <div className="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">

@@ -3,15 +3,22 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Menu, X, Home, Search, Users, Mail, Phone } from 'lucide-react';
+import { Menu, X, Home, Search, Users, Mail, Phone, UserPlus, LogIn } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import LanguageSelector from '@/components/ui/LanguageSelector';
 import LocationSearch from '@/components/search/LocationSearch';
+import AuthModal from '@/components/auth/AuthModal';
+import UserMenu from '@/components/auth/UserMenu';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeTab, setActiveTab] = useState('buy');
+  const [authModalOpen, setAuthModalOpen] = useState(false);
+  const [authModalMode, setAuthModalMode] = useState<'signin' | 'signup'>('signin');
+  
+  const { isAuthenticated, isLoading } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -92,12 +99,44 @@ export default function Header() {
 
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center space-x-4">
-            <Button variant="outline" size="sm">
-              List Your Property
-            </Button>
-            <Button variant="primary" size="sm">
-              Schedule Viewing
-            </Button>
+            {!isAuthenticated ? (
+              <>
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => {
+                    setAuthModalMode('signin');
+                    setAuthModalOpen(true);
+                  }}
+                  className="flex items-center space-x-2"
+                >
+                  <LogIn size={16} />
+                  <span>Sign In</span>
+                </Button>
+                <Button 
+                  variant="primary" 
+                  size="sm"
+                  onClick={() => {
+                    setAuthModalMode('signup');
+                    setAuthModalOpen(true);
+                  }}
+                  className="flex items-center space-x-2"
+                >
+                  <UserPlus size={16} />
+                  <span>Join</span>
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button variant="outline" size="sm">
+                  List Your Property
+                </Button>
+                <Button variant="primary" size="sm">
+                  Schedule Viewing
+                </Button>
+                <UserMenu />
+              </>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -171,17 +210,55 @@ export default function Header() {
             ))}
             <div className="border-t border-gray-200 pt-4 mt-4">
               <div className="px-3 space-y-3">
-                <Button variant="outline" className="w-full">
-                  List Your Property
-                </Button>
-                <Button variant="primary" className="w-full">
-                  Schedule Viewing
-                </Button>
+                {!isAuthenticated ? (
+                  <>
+                    <Button 
+                      variant="outline" 
+                      className="w-full flex items-center justify-center space-x-2"
+                      onClick={() => {
+                        setAuthModalMode('signin');
+                        setAuthModalOpen(true);
+                        setIsMenuOpen(false);
+                      }}
+                    >
+                      <LogIn size={16} />
+                      <span>Sign In</span>
+                    </Button>
+                    <Button 
+                      variant="primary" 
+                      className="w-full flex items-center justify-center space-x-2"
+                      onClick={() => {
+                        setAuthModalMode('signup');
+                        setAuthModalOpen(true);
+                        setIsMenuOpen(false);
+                      }}
+                    >
+                      <UserPlus size={16} />
+                      <span>Join</span>
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Button variant="outline" className="w-full">
+                      List Your Property
+                    </Button>
+                    <Button variant="primary" className="w-full">
+                      Schedule Viewing
+                    </Button>
+                  </>
+                )}
               </div>
             </div>
           </div>
         </div>
       )}
+
+      {/* Auth Modal */}
+      <AuthModal 
+        isOpen={authModalOpen}
+        onClose={() => setAuthModalOpen(false)}
+        initialMode={authModalMode}
+      />
     </header>
   );
 }
