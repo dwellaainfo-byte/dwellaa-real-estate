@@ -12,7 +12,7 @@ interface Language {
 }
 
 const languages: Language[] = [
-  { code: 'en', name: 'ENGLISH', flag: '🇺🇸' },
+  { code: 'en', name: 'ENGLISH', flag: '' },
   { code: 'fr', name: 'FRANÇAIS', flag: '🇫🇷' },
   { code: 'it', name: 'ITALIANO', flag: '🇮🇹' },
 ];
@@ -45,9 +45,9 @@ export default function LanguageSelector() {
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
+        className={`flex items-center px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors ${selectedLanguage.flag ? 'space-x-2' : ''}`}
       >
-        <span className="text-xl">{selectedLanguage.flag}</span>
+        {selectedLanguage.flag && <span className="text-xl">{selectedLanguage.flag}</span>}
         <span className="hidden sm:block text-sm font-medium text-gray-700">
           {selectedLanguage.name}
         </span>
@@ -71,13 +71,13 @@ export default function LanguageSelector() {
               <button
                 key={language.code}
                 onClick={() => handleLanguageChange(language)}
-                className={`w-full text-left px-4 py-3 hover:bg-gray-50 transition-colors flex items-center space-x-3 ${
+                className={`w-full text-left px-4 py-3 hover:bg-gray-50 transition-colors flex items-center ${language.flag ? 'space-x-3' : ''} ${
                   selectedLanguage.code === language.code 
                     ? 'bg-blue-50 text-blue-700' 
                     : 'text-gray-700'
                 }`}
               >
-                <span className="text-xl">{language.flag}</span>
+                {language.flag && <span className="text-xl">{language.flag}</span>}
                 <span className="font-medium">{language.name}</span>
               </button>
             ))}
